@@ -110,17 +110,18 @@ export default class AppContainer extends Component {
         </div>
         <div className="col-xs-10">
         {
-          this.state.selectedAlbum.id ?
-          <Album
-            album={this.state.selectedAlbum}
-            currentSong={this.state.currentSong}
-            isPlaying={this.state.isPlaying}
-            toggleOne={this.toggleOne}
-          /> :
-          <Albums
-            albums={this.state.albums}
-            selectAlbum={this.selectAlbum}
-          />
+          this.state.selectedAlbum.id
+          ? React.cloneElement(this)
+          // ? <Album
+          //     album={this.state.selectedAlbum}
+          //     currentSong={this.state.currentSong}
+          //     isPlaying={this.state.isPlaying}
+          //     toggleOne={this.toggleOne}
+          //   />
+          // : <Albums
+          //     albums={this.state.albums}
+          //     selectAlbum={this.selectAlbum}
+          //   />
         }
         </div>
         <Player
