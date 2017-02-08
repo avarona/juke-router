@@ -2,9 +2,7 @@ import React from 'react';
 import Songs from '../components/Songs';
 
 class Album extends React.Component {
-  constructor(props){
-    super(props);
-  }
+
 
   componentDidMount (){
     const albumId = this.props.routeParams.albumId;
