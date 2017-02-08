@@ -34,6 +34,12 @@ export default class AppContainer extends Component {
       this.next());
     AUDIO.addEventListener('timeupdate', () =>
       this.setProgress(AUDIO.currentTime / AUDIO.duration));
+
+    axios.get('/api/artists/')
+    .then(res => res.data)
+    .then(artists => this.setState({
+      artists: artists
+    }))
   }
 
   onLoad (albums) {
@@ -91,6 +97,7 @@ export default class AppContainer extends Component {
   }
 
   selectAlbum (albumId) {
+    console.log("selectAlbum")
     axios.get(`/api/albums/${albumId}`)
       .then(res => res.data)
       .then(album => this.setState({
@@ -112,7 +119,6 @@ export default class AppContainer extends Component {
         {
           this.props.children
           ? React.cloneElement(this.props.children, {
-
               // Album (singular) component's props
               album: this.state.selectedAlbum,
               currentSong: this.state.currentSong,
@@ -121,7 +127,9 @@ export default class AppContainer extends Component {
 
               // Albums (plural) component's props
               albums: this.state.albums,
-              selectAlbum: this.selectAlbum // note that this.selectAlbum is a method, and this.state.selectedAlbum is the chosen album
+              selectAlbum: this.selectAlbum, // note that this.selectAlbum is a method, and this.state.selectedAlbum is the chosen album
+
+              artists: this.state.artists
             })
           : null
         }
